@@ -2,19 +2,19 @@
 ## functions do
 
 
-## This function implements a list with 4 sub functions to...
+## This function implements a "cache matrix" which is actually
+## a list with 4 sub functions to...
 ## 1. set the pre-calculated matrix
 ## 2. get the pre-calculated matrix
 ## 3. set the inverse (via solve function) of the matrix
 ## 4. get the inverse of the matrix
 ## 
 makeCacheMatrix <- function(x = matrix()) {
-    ## Reset free variable m
     ## m will contain the inversed matrix
     m <- NULL
     
     ## Declare subfunction set
-    ## - 
+    ## - initialises value and set the inverse to NULL
     set <- function(y) {
         x <<- y
         m <<- NULL
@@ -32,14 +32,17 @@ makeCacheMatrix <- function(x = matrix()) {
     ## - return m (inverse matrix)
     getsolve <- function() m
     
-    ## Finally, create list with 
+    ## Finally, create list containing function return values 
     list(set = set, get = get,
          setsolve = setsolve,
          getsolve = getsolve)
   
 }
 
-## This function accepts a list and returns  
+## This function accepts a list or "cache matrix" created in the function above
+## and calculates the inverse storing the result in cache.  If the matrix has 
+## previously been calculated, then the inverse calculation will be skipped and
+## the result will be retrieved from cache
 cacheSolve <- function(x, ...) {
     ## Return a matrix that is the inverse of 'x'
 
